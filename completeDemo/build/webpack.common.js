@@ -5,14 +5,14 @@ const devMode = process.env.NODE_ENV !== 'production';
 const webpack = require('webpack');
 
 // 静态资源输出
-// const copyWebpackPlugin = require("copy-webpack-plugin");
+const copyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports={
     // context目录，配置entry points and loaders。文档建议配置，使我的配置独立于CWD（当前工作目录）。
     // context: path.resolve(__dirname, '../'),
     entry:{
         // entry默认'./src'，entry只能设置在context目录下的./，context目录默认为项目根目录。所以此处'./'指项目根目录下
-        app:'./src/script/app.js'
+        app:'./src/entry.js'
     },    
     module:{
         rules:[
@@ -43,9 +43,11 @@ module.exports={
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
                 options: {
-                    limit: 1,
+                    // limit以下使用url-loader转为base64，以上使用指定loader，默认file-loader处理图片图片。单位：字节
+                    // limit: 8192,
+                    limit: 700,
                     // [ext]文件扩展名
-                    name:devMode?"img/[name].[ext]":"img/[name].[hash].[ext]"                    
+                    name:devMode ? "images/[name].[ext]" : "images/[name].[hash].[ext]"                    
                 }
             },
             {
@@ -82,14 +84,14 @@ module.exports={
         // html模板
         new HtmlWebpackPlugin({
             // 设置生成的index.html的title
-            title:'ngJs dev',
-            template: 'src/index.html',
-            // favicon: path.join(__dirname, '../favicon.ico'),
+            title:'webpack demo',
+            template: 'index.html',
+            // favicon: path.resolve(__dirname, '../favicon.ico'),
         }),        
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
-            filename: devMode?"css/[name].css":"css/[name].[hash].css",
+            filename: devMode ? "css/[name].css" : "css/[name].[hash].css",
             //此处也可以根据splitChunkPlugin的chunk名字做对应
             // chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
         }),
@@ -103,21 +105,20 @@ module.exports={
         }),
 
         //复制静态文件
-		// new copyWebpackPlugin([
-		// 	{
-		// 		from: path.resolve(__dirname,"./view"),
-		// 		to: './view'
-		// 	},         
-		// ]),
+		new copyWebpackPlugin([
+			{
+				from: path.resolve(__dirname,"../static"),
+				to: './static'
+			},         
+		]),
     ],
     output:{
         //图片，js，cssLink等静态资源必须加publicPath，因为打包和开发目录构造不同，开发指定'/'为根目录，生产指定'./'为当前目录（一般为index.html指定），此处以绝对路径指向。css背景图片单独指定publicPath
-        publicPath:devMode?'/':'./',
+        publicPath: devMode ? '/' : './',
         // vue-cli里的[chunkhash]？
-        filename:devMode?'js/[name].js':'js/[name].[hash].js',
+        filename: devMode ? 'js/[name].js' : 'js/[name].[hash].js',
         // filename:'js/[name].[chunkhash].js',
-        path: path.resolve(__dirname, '../dist'),
-        // chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+        path: path.resolve(__dirname, '../dist')
     },
     // optimization.splitChunks代码引用去重分离，把公共引用代码抽离到再另一个output.js中
     // 感觉optimization.splitChunks是用在多页面代码去重分离的
