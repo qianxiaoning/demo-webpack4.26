@@ -1,5 +1,4 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devMode = process.env.NODE_ENV !== 'production';
 const webpack = require('webpack');
@@ -44,8 +43,7 @@ module.exports={
                 loader: 'url-loader',
                 options: {
                     // limit以下使用url-loader转为base64，以上使用指定loader，默认file-loader处理图片图片。单位：字节
-                    // limit: 8192,
-                    limit: 700,
+                    limit: 10000,
                     // [ext]文件扩展名
                     name:devMode ? "images/[name].[ext]" : "images/[name].[hash].[ext]"                    
                 }
@@ -80,14 +78,7 @@ module.exports={
             '@':path.resolve(__dirname,'../src')
         }
     },
-    plugins:[        
-        // html模板
-        new HtmlWebpackPlugin({
-            // 设置生成的index.html的title
-            title:'webpack demo',
-            template: 'index.html',
-            // favicon: path.resolve(__dirname, '../favicon.ico'),
-        }),        
+    plugins:[                        
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
@@ -98,19 +89,18 @@ module.exports={
         // DllReferencePlugin引用打包好的manifest清单来进行第二次打包
         new webpack.DllReferencePlugin({
             // 指导Webpack匹配manifest.json中库的路径，和DllPlugin中一致
-            // 即为默认的项目根目录
-            context: path.resolve(__dirname, '..'),
+            // 项目中为根目录下dll文件夹下
+            context: path.resolve(__dirname, '../dll'),
             // manifest相对于此文件的位置
             manifest: path.resolve(__dirname, '../dll/manifest.json')
         }),
-
         //复制静态文件
 		new copyWebpackPlugin([
 			{
 				from: path.resolve(__dirname,"../static"),
 				to: './static'
 			},         
-		]),
+		])
     ],
     output:{
         //图片，js，cssLink等静态资源必须加publicPath，因为打包和开发目录构造不同，开发指定'/'为根目录，生产指定'./'为当前目录（一般为index.html指定），此处以绝对路径指向。css背景图片单独指定publicPath

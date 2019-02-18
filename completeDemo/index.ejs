@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- 此为ejs语法，可以在index.html模板中直接使用 -->
+  <!-- 但是html-loader不支持ejs语法，所以用了html-loader后，得使用index.ejs -->
+  <!-- 用htmlWebpackPlugin.options.xxx获取HtmlWebpackPlugin对象中的值 -->
+  <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+<body>
+  <div id='app'></div>
+</body>
+</html>
