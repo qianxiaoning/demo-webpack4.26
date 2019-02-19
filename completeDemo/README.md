@@ -8,46 +8,12 @@ browserslist
 ```
 #### completeDemo 我的完整项目demo
 - build webpack构建文件
-  - a
 - src 生产文件
-   - a
-    - a
-  - a
+  - images 图片文件夹
+  - pages 页面文件夹
+    - index
+      - index.html 页面html模板
+      - index.js 页面入口函数
+  - entry.js 主入口函数
 - static 静态资源
-    - a
-    - a
-        - a
-          - a
 - index.ejs webpack HtmlWebpackPlugin模板
->aa
-> aa
-- a
-    >a
-- a
-  >a
-- a
-> a
-- a
-> a
-> a
-- a
-> a
-> > a
-- a  
-> a
-> > a
-> > a
-- a  
->a
->>a
->>a
-- a  
-> a
->> a
->> aaaaaaaaaaaaaaaa
-aaaaaaaaaaa
-- a  
-> a
->> a
->> aaaaaaaaaaaaaaaa
->> aaaaaaaaaaa
