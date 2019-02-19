@@ -8,12 +8,13 @@ browserslist
 ```
 #### completeDemo 我的完整项目demo
 - build webpack构建文件
+  - a
 - src 生产文件
- - a
+   - a
     - a
   - a
 - static 静态资源
-  - a
+    - a
     - a
         - a
           - a
