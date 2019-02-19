@@ -9,8 +9,9 @@ browserslist
 #### completeDemo 我的完整项目demo
 - build webpack构建文件
 - src 生产文件
-```
-- a
-```
+ - a
+  - a
 - static 静态资源
+    - a
+          - a
 - index.ejs webpack HtmlWebpackPlugin模板
