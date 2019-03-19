@@ -1,12 +1,11 @@
 ```
 补充扩展：
-添加babel设置
 postcss
-browserslist
 国际化
 happypack
-promise-polyfill
-babel?-polyfill
+
+dll检查补充
+补充readme.md项目结构
 ```
 #### completeDemo 我的完整项目demo
 - build webpack构建文件

@@ -36,9 +36,13 @@ module.exports={
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader',
+                    loader: 'babel-loader'
+                    // 也可直接在此配置babel配置
                     // options: {
-                    //     presets: ['@babel/preset-env']
+                    //     presets: ['@babel/preset-env'],
+                    //     plugins: []
+                    //     // 指定目录缓存Babel加载结果，提高速度
+                    //     // cacheDirectory: true
                     // }
                 }
             },            

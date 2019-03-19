@@ -12,13 +12,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
     "jquery": "^3.3.1",
     "lodash": "^4.17.11"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-preset-env": "^1.7.0",
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "babel-loader": "^8.0.5",
     "clean-webpack-plugin": "^1.0.0",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^1.0.1",
@@ -40,10 +41,5 @@
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10",
     "webpack-merge": "^4.1.4"
-  },
-  "babel": {
-    "presets": [
-      "env"
-    ]
   }
 }
