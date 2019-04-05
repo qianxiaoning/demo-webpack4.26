@@ -4,12 +4,16 @@ postcss
 国际化
 happypack
 
-dll检查补充
+补充dll目录
 补充readme.md项目结构
 
-简单路由实现
+路由引入项目
 
-import index的问题
+build页面import index的问题
+
+多线程可放在webpack.common里面
+
+和本地的组合比较看看
 ```
 #### completeDemo 我的完整项目demo
 - build webpack构建文件
