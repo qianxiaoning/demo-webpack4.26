@@ -1,23 +1,49 @@
+process.env.NODE_ENV = 'production';
+
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const path = require('path');
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 // 压缩css，另外需要安装UglifyJsPlugin
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = merge(common, {
   mode:'production',
   devtool:'source-map',
-  plugins:[
-    new CleanWebpackPlugin(
-      ['dist'],
+  module:{
+    rules:[
       {
-          root:path.resolve(__dirname,'../'),
-          // 排除某项
-          // exclude:  ['xxx.js'],
-          verbose:true
+        test: /\.(css|less|scss)$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            // options: {                            
+            //     // 可以给css文件中单独设置公共路径
+            //     publicPath: '../'
+            // }
+          },
+          // 对应less,sass的loader
+          "css-loader",
+          // "postcss-loader",
+          "less-loader"
+        ]            
+      }        
+    ]
+  },
+  plugins:[
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: "static/css/[name].[hash:8].css",
+      //此处也可以根据splitChunkPlugin的chunk名字做对应
+      // chunkFilename: devMode ? '[id].css' : '[id].[hash:8].css',
+    }),
+    new CleanWebpackPlugin(
+      // 自动清除output.path下目录
+      {
+        verbose:true
       }
     ),
     // html模板
@@ -27,7 +53,7 @@ module.exports = merge(common, {
       // html生成子目录，默认为output.path也就是dist/下
       filename:'index.html',
       template: 'index.ejs',
-      // favicon: path.resolve(__dirname, '../favicon.ico'),
+      favicon: 'fav.ico',
       // 注入方式。true,'body'使js资源放入body底部。'head'使js资源放入body头部
       inject: true,
       // 使变小
@@ -40,9 +66,13 @@ module.exports = merge(common, {
         removeAttributeQuotes: true
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
-      },
-    }),
+      }
+    })  
   ],
+  // optimization.splitChunks代码引用去重分离，把公共引用代码抽离到再另一个output.js中
+  // 感觉optimization.splitChunks是用在多页面代码去重分离的
+  // 单页面所有第三方库已经用了dll配合manifest保证只引入一次了，不用optimization.splitChunks了
+  // 如果多页面用了dll还需要用optimization.splitChunks的，如果生成的commonSplit.js文件过大，可以试试import(/* webpackChunkName:"xxx"*/ 'xxx')动态引入xxx库，打包时output会通过chunkFilename动态拆分细化commonSplit.js，减小不必要的加载
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
@@ -52,7 +82,16 @@ module.exports = merge(common, {
         parallel: true,
         sourceMap: true // set to true if you want JS source maps
       }),
-      new OptimizeCSSAssetsPlugin({})
-    ]
-  },  
+      new OptimizeCSSAssetsPlugin({}),      
+    ],
+    // 使用一些出口（接口？）
+    // usedExports:true,
+    // splitChunks:{
+    //     // chunks需要处理的代码块
+    //     chunks:'all',
+    //     // 至少有2个entry文件引用重复时分离，单entry页面是不能公共提取分离的，另外单entry是不会import加载重复的？
+    //     minChunks:2,
+    //     name:'commonSplit'
+    // }
+  }
 });

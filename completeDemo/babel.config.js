@@ -8,7 +8,7 @@ module.exports = function (api) {
             '@babel/preset-env',
             {
                 // 根据环境支持度，加载所需部分@babel/polyfill            
-                "useBuiltIns": "usage"
+                // "useBuiltIns": "usage"
                 // // 指定环境，可以是与browserslist兼容
                 // "targets": "> 0.25%, not dead",
                 // "include": '',

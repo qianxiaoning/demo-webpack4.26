@@ -1,3 +1,4 @@
+const path = require('path');
 module.exports = {
     // 不再向上找
     // "root": true,
@@ -29,18 +30,23 @@ module.exports = {
         }        
     },
     // 设置 不生效
-    // "settings": {
-    //     // import规则的忽略
-    //     "import/ignore": ["\.html$"]
-    // },
+    "settings": {
+        // import规则的忽略
+        // "import/ignore": ["\.html$"],
+        // 装eslint-import-resolver-webpack，指定有别名的webpack文件路径，解决webpack别名在eslint的import/no-unresolved错误
+        "import/resolver": {
+            "webpack": {
+                "config": "build/webpack.common.js"
+            }
+        }        
+    },
     // 使用第三方插件。使用之前，npm 安装它
     // 'plugins': ["eslint-plugin-plugin2"],
+    // "plugins": ["import"],
     // 额外的规则或覆盖默认的规则
     "rules": {
         //允许windows开发环境
         "linebreak-style": [0 ,"error", "windows"],
-        // 去除Unable to resolve path to module '@/pages/index/index.html'  import/no-unresolved此种错误 大概是由于@别名
-        "import/no-unresolved": 0,
         // 临时解除import置顶
         "import/first": 0,
         // 临时解除defined未用

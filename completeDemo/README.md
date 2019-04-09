@@ -7,13 +7,11 @@ happypack
 补充dll目录
 补充readme.md项目结构
 
-路由引入项目
-
-build页面import index的问题
 
 多线程可放在webpack.common里面
 
-和本地的组合比较看看
+babel问题
+注释看一遍
 ```
 #### completeDemo 我的完整项目demo
 - build webpack构建文件
