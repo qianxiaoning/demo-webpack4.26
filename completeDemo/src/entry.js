@@ -28,6 +28,6 @@ document.querySelector('#app').appendChild(div);
 
 /* eslint-disable */
 // 测试@babel/polyfill效果
-// [1, 2, 3].map((n) => n + 1);
-// var a = new Promise();
+[1, 2, 3].map((n) => n + 1);
+var a = Object.assign([1],[1,2]);
 /* eslint-enable */
