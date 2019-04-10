@@ -2,7 +2,7 @@
 补充扩展：
 postcss
 国际化
-
+本地试验国际化
 ```
 #### completeDemo 我的完整项目demo
 - build webpack构建文件
