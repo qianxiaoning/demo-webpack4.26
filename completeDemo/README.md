@@ -3,10 +3,6 @@
 postcss
 国际化
 
-
-
-happypack可放在webpack.common里面
-
 ```
 #### completeDemo 我的完整项目demo
 - build webpack构建文件
