@@ -1,6 +1,5 @@
 ```
 补充扩展：
-postcss
 ```
 #### completeDemo 我的完整项目demo
 - build webpack构建文件
@@ -14,3 +13,4 @@ postcss
 - babel.config.js babel配置文件
 - fav.ico ico
 - index.ejs webpack HtmlWebpackPlugin模板
+- postcss.config.js postcss配置文件

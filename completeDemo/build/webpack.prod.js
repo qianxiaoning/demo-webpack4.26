@@ -26,7 +26,9 @@ module.exports = merge(common, {
           },
           // 对应less,sass的loader
           "css-loader",
-          // "postcss-loader",
+          {
+            loader: "postcss-loader"
+          },
           "less-loader"
         ]            
       }        

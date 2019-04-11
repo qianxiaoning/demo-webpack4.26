@@ -39,22 +39,22 @@ import cn from './locales/cn';
 
 let local = cn;
 const $t = s => local[s];
-const p = document.querySelector('p');
+
 const cnBtn = document.createElement('span');
 cnBtn.innerHTML = '中文';
+document.querySelector('#app').appendChild(cnBtn);
+const enBtn = document.createElement('span');
+enBtn.innerHTML = 'english';
+document.querySelector('#app').appendChild(enBtn);
+const p = document.createElement('p');
+p.innerHTML = $t('hello');
+document.querySelector('#app').appendChild(p);
+
 cnBtn.onclick = () => {
     local = cn;
     p.innerHTML = $t('hello');
 };
-document.querySelector('#app').appendChild(cnBtn);
-
-const enBtn = document.createElement('span');
-enBtn.innerHTML = 'english';
 enBtn.onclick = () => {
     local = en;
     p.innerHTML = $t('hello');
 };
-document.querySelector('#app').appendChild(enBtn);
-
-p.innerHTML = $t('hello');
-document.querySelector('#app').appendChild(p);
