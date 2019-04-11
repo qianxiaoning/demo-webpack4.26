@@ -2,7 +2,7 @@
 补充扩展：
 ```
 #### completeDemo 我的完整项目demo
-- build webpack构建文件
+- build webpack构建文件（主要包含dll, copyWebpackPlugin, eslint, babel, less, HtmlWebpackPlugin, webpack-dev-server, hmr, CleanWebpackPlugin, webpack-merge, MiniCssExtractPlugin这些配置）
 - src 生产文件
   - images 图片文件夹
   - locales 国际化目录
