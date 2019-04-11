@@ -1,13 +1,12 @@
 ```
 补充扩展：
 postcss
-国际化
-本地试验国际化
 ```
 #### completeDemo 我的完整项目demo
 - build webpack构建文件
 - src 生产文件
   - images 图片文件夹
+  - locales 国际化目录
   - entry.js 入口函数
   - index.less 样式文件
 - static 静态资源

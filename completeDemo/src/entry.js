@@ -21,6 +21,7 @@ function imgDomFun(imgSrc) {
 }
 document.querySelector('#app').appendChild(imgDomFun(littlePic));
 document.querySelector('#app').appendChild(imgDomFun(bigPic));
+// 实践css中背景图片
 const div = document.createElement('div');
 div.classList.add('cssImg');
 div.innerHTML = 'cssImg';
@@ -31,3 +32,29 @@ document.querySelector('#app').appendChild(div);
 [1, 2, 3].map((n) => n + 1);
 var a = Object.assign([1],[1,2]);
 /* eslint-enable */
+
+// 国际化
+import en from './locales/en';
+import cn from './locales/cn';
+
+let local = cn;
+const $t = s => local[s];
+const p = document.querySelector('p');
+const cnBtn = document.createElement('span');
+cnBtn.innerHTML = '中文';
+cnBtn.onclick = () => {
+    local = cn;
+    p.innerHTML = $t('hello');
+};
+document.querySelector('#app').appendChild(cnBtn);
+
+const enBtn = document.createElement('span');
+enBtn.innerHTML = 'english';
+enBtn.onclick = () => {
+    local = en;
+    p.innerHTML = $t('hello');
+};
+document.querySelector('#app').appendChild(enBtn);
+
+p.innerHTML = $t('hello');
+document.querySelector('#app').appendChild(p);
