@@ -1,6 +1,5 @@
-// 全局css，css用CommonJS方法引入
-require('./index.less');
-
+// 全局css
+import './index.less';
 // 引入当前页面需要libs
 import jquery from 'jquery';
 import _ from 'lodash';

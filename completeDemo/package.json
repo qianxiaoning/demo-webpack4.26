@@ -1,6 +1,6 @@
 {
   "name": "myng",
-  "sideEffects": false,
+  "sideEffects": ["*.css", "*.less", "*.scss"],
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
