@@ -15,14 +15,14 @@ module.exports={
     },    
     module:{
         rules:[
-            {
-                test:/\.css$/,
-                use:['style-loader','css-loader']
-            },
-            {
-                test:/\.html$/,
-                use:['html-loader']
-            },
+            // {
+            //     test:/\.css$/,
+            //     use:['style-loader','css-loader']
+            // },
+            // {
+            //     test:/\.html$/,
+            //     use:['html-loader']
+            // },
             {
                 enforce: 'pre',
                 test: /\.js$/,
@@ -45,11 +45,7 @@ module.exports={
                     //     // cacheDirectory: true
                     // }
                 }
-            },            
-            {
-                test:/\.less$/,
-                use:['style-loader','css-loader','less-loader']
-            },
+            },                        
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
