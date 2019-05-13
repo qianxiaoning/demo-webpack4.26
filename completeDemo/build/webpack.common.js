@@ -99,5 +99,25 @@ module.exports={
         // filename:'js/[name].[chunkhash].js',
         path: path.resolve(__dirname, '../dist')
     },    
+    optimization: {
+        splitChunks:{
+            // 使用默认配置
+            chunks:'all',
+            // 至少有2个entry文件引用重复时分离
+            minChunks: 1,
+            name: false
+            // cacheGroups: {
+            //   vendors: {
+            //     // test: /[\\/]node_modules[\\/](react|react-dom|antd|echarts-for-react|prop-types|jquery|moment|postal)[\\/]/,
+            //     // test: /[\\/]dll[\\/](react|react-dom)[\\/]/,
+            //     // test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+            //     test: /[\\/]node_modules[\\/]/,
+            //     // name: 'vendors',
+            //     priority: -9,
+            //     chunks: 'all',
+            //   }
+            // }
+        }
+    }
 }
     

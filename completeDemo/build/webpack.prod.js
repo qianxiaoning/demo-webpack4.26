@@ -86,24 +86,7 @@ module.exports = merge(common, {
         parallel: true
       }),
       new OptimizeCSSAssetsPlugin({}),      
-    ],
-    splitChunks:{
-      // 使用默认配置
-      chunks:'all',
-      // 至少有2个entry文件引用重复时分离
-      minChunks: 2
-      // cacheGroups: {
-      //   vendors: {
-      //     // test: /[\\/]node_modules[\\/](react|react-dom|antd|echarts-for-react|prop-types|jquery|moment|postal)[\\/]/,
-      //     // test: /[\\/]dll[\\/](react|react-dom)[\\/]/,
-      //     // test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-      //     test: /[\\/]node_modules[\\/]/,
-      //     // name: 'vendors',
-      //     priority: -9,
-      //     chunks: 'all',
-      //   }
-      // }
-    },
+    ],    
     // 多页面开启single避免每个chunk都写入了webpack初始化，设置single多页面将只写入一个webpack初始化
     runtimeChunk: "single"
   }
