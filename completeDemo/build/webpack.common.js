@@ -47,12 +47,19 @@ module.exports={
                 }
             },                        
             {
-                test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot)(\?.*)?$/,
+                test: /\.(png|jpe?g|gif)(\?.*)?$/,
                 loader: 'url-loader',
                 options: {
                     // limit以下使用url-loader转为base64，以上使用指定loader，默认file-loader处理图片图片。单位：字节
                     limit: 10000,
                     // [ext]文件扩展名
+                    name:devMode ? "[name].[ext]" : "static/images/[name].[hash:8].[ext]"                    
+                }
+            },
+            {
+                test: /\.(svg|woff|woff2|ttf|eot)(\?.*)?$/,
+                loader: 'file-loader',
+                options: {
                     name:devMode ? "[name].[ext]" : "static/images/[name].[hash:8].[ext]"                    
                 }
             }            
