@@ -26,17 +26,9 @@
             // 默认corejs为2，要装core-js@2。使用core-js@3时，得指定corejs: 3
             // "corejs": 3
         }
-      ],
-      "@babel/preset-react"
+      ]
     ],
     "plugins": [
-      // 使用babel-plugin-import 对ant按需加载
-      ["import",
-        {
-          "libraryName": "antd",
-          "libraryDirectory": "es",
-          "style": true // `style: true` 会加载 less 文件
-        }
-      ]
+      
     ]
 }
