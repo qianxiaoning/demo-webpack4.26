@@ -7,7 +7,7 @@ module.exports={
     context: path.resolve(__dirname, '../'),
     entry:{
         // 先把libs打包一遍
-        libs:['jquery', 'lodash', '@babel/polyfill']
+        libs:['jquery', 'lodash', 'core-js', 'regenerator-runtime']
     },
     output:{
         path: path.resolve(__dirname, '../dll'),
