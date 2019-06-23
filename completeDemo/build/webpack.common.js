@@ -15,14 +15,14 @@ module.exports={
     },    
     module:{
         rules:[
-            {
-                test:/\.css$/,
-                use:['style-loader','css-loader']
-            },
-            {
-                test:/\.html$/,
-                use:['html-loader']
-            },
+            // {
+            //     test:/\.css$/,
+            //     use:['style-loader','css-loader']
+            // },
+            // {
+            //     test:/\.html$/,
+            //     use:['html-loader']
+            // },
             {
                 enforce: 'pre',
                 test: /\.js$/,
@@ -45,18 +45,21 @@ module.exports={
                     //     // cacheDirectory: true
                     // }
                 }
-            },            
+            },                        
             {
-                test:/\.less$/,
-                use:['style-loader','css-loader','less-loader']
-            },
-            {
-                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                test: /\.(png|jpe?g|gif)(\?.*)?$/,
                 loader: 'url-loader',
                 options: {
                     // limit以下使用url-loader转为base64，以上使用指定loader，默认file-loader处理图片图片。单位：字节
                     limit: 10000,
                     // [ext]文件扩展名
+                    name:devMode ? "[name].[ext]" : "static/images/[name].[hash:8].[ext]"                    
+                }
+            },
+            {
+                test: /\.(svg|woff|woff2|ttf|eot)(\?.*)?$/,
+                loader: 'file-loader',
+                options: {
                     name:devMode ? "[name].[ext]" : "static/images/[name].[hash:8].[ext]"                    
                 }
             }            
@@ -96,5 +99,25 @@ module.exports={
         // filename:'js/[name].[chunkhash].js',
         path: path.resolve(__dirname, '../dist')
     },    
+    optimization: {
+        splitChunks:{
+            // 使用默认配置
+            chunks:'all',
+            // 至少有2个entry文件引用重复时分离
+            minChunks: 1,
+            name: false
+            // cacheGroups: {
+            //   vendors: {
+            //     // test: /[\\/]node_modules[\\/](react|react-dom|antd|echarts-for-react|prop-types|jquery|moment|postal)[\\/]/,
+            //     // test: /[\\/]dll[\\/](react|react-dom)[\\/]/,
+            //     // test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+            //     test: /[\\/]node_modules[\\/]/,
+            //     // name: 'vendors',
+            //     priority: -9,
+            //     chunks: 'all',
+            //   }
+            // }
+        }
+    }
 }
     

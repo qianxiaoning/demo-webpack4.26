@@ -3,8 +3,9 @@ process.env.NODE_ENV = 'production';
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-// 压缩css，另外需要安装UglifyJsPlugin
+// js压缩
+const TerserJSPlugin = require("terser-webpack-plugin");
+// css压缩
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -13,21 +14,24 @@ module.exports = merge(common, {
   mode:'production',
   devtool:'source-map',
   module:{
-    rules:[
+    rules:[      
       {
         test: /\.(css|less|scss)$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
-            // options: {                            
-            //     // 可以给css文件中单独设置公共路径
-            //     publicPath: '../'
-            // }
+            loader: MiniCssExtractPlugin.loader
           },
-          // 对应less,sass的loader
           "css-loader",
-          // "postcss-loader",
-          "less-loader"
+          {
+            loader: "postcss-loader"
+          },
+          {
+            loader: "less-loader",
+            options: {
+              // 为了兼容babel-plugin-import ant
+              javascriptEnabled: true
+            }
+          }
         ]            
       }        
     ]
@@ -75,23 +79,15 @@ module.exports = merge(common, {
   // 如果多页面用了dll还需要用optimization.splitChunks的，如果生成的commonSplit.js文件过大，可以试试import(/* webpackChunkName:"xxx"*/ 'xxx')动态引入xxx库，打包时output会通过chunkFilename动态拆分细化commonSplit.js，减小不必要的加载
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({
+      new TerserJSPlugin({
         // 开启缓存
         cache: true,
         // 压缩需要
-        parallel: true,
-        sourceMap: true // set to true if you want JS source maps
+        parallel: true
       }),
       new OptimizeCSSAssetsPlugin({}),      
-    ],
-    // 使用一些出口（接口？）
-    // usedExports:true,
-    // splitChunks:{
-    //     // chunks需要处理的代码块
-    //     chunks:'all',
-    //     // 至少有2个entry文件引用重复时分离，单entry页面是不能公共提取分离的，另外单entry是不会import加载重复的？
-    //     minChunks:2,
-    //     name:'commonSplit'
-    // }
+    ],    
+    // 多页面开启single避免每个chunk都写入了webpack初始化，设置single多页面将只写入一个webpack初始化
+    runtimeChunk: "single"
   }
 });

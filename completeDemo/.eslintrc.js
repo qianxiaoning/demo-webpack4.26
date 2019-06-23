@@ -52,6 +52,8 @@ module.exports = {
         // 临时解除defined未用
         "no-unused-vars": 0,
         // 缩进改为4空格，默认2空格
-        "indent": [0, 2]
+        "indent": [0, 2],
+        // 对象尾随逗号取消
+        "comma-dangle": [2, "never"]
     }    
 };

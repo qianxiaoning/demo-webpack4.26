@@ -1,0 +1,34 @@
+{
+    "presets": [
+      [
+        "@babel/preset-env",        
+        {
+            // // 指定环境，可以用package.json中browserslist
+            // "targets": "> 0.25%, not dead",
+            // "include": "",
+            // "exclude": "",
+            // // 根据环境支持度，加载所需部分@babel/polyfill            
+            // "useBuiltIns": "usage",
+            // // 在入口文件，import "@babel/polyfill";引入polyfill     
+            // "useBuiltIns": "entry",
+            // // 1.在webpack.config.js entry数组中的头部添加"@babel/polyfill"
+            // // 2.或在需要的页面引入需要的polyfill部分，如
+            // // import 'core-js/modules/es7.string.pad-start';
+            // // import 'core-js/modules/es7.string.pad-end';
+            // // import 'core-js/modules/web.timers';
+            // // import 'core-js/modules/web.immediate';
+            // // import 'core-js/modules/web.dom.iterable';
+            // "useBuiltIns": false,
+
+            // 根据环境支持度，加载所需部分polyfill            
+            "useBuiltIns": "usage",
+            // 因@babel/polyfill不能平滑过渡corejs2和corejs3，把@babel/polyfill分为core-js和regenerator-runtime
+            // 默认corejs为2，要装core-js@2。使用core-js@3时，得指定corejs: 3
+            // "corejs": 3
+        }
+      ]
+    ],
+    "plugins": [
+      
+    ]
+}
